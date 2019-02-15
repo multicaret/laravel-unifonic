@@ -1,9 +1,11 @@
-# Laravel 5.x Unifonic
-Start sending SMS and making Voice calls with Unifonic right away using Laravel.
-
 <p align="center">
 <img src="http://unifonic.com/wp-content/uploads/2016/08/logo-1.png">
 </p>
+
+
+# Laravel Unifonic 5.x 
+Start sending SMS and making Voice calls with Unifonic right away using Laravel.
+
 
 <p align="center">
 <a href="https://packagist.org/packages/liliom/laravel-unifonic"><img src="https://poser.pugx.org/liliom/laravel-unifonic/d/total.svg" alt="Total Downloads"></a>
@@ -45,7 +47,7 @@ And add the alias as well
 ],
 ```
 
-####Configurations:
+## Configurations
 Add to your `config/services.php` a new array as the following
 ```
 'unifonic' => [
@@ -61,9 +63,9 @@ UNIFONIC_APP_SID={YOUR_DEFAULT_APP_ID}
 ```
 
 ---
-### Usage
+## Usage
 
-####Account related methods:
+#### Account related methods:
 ```php
 Unifonic::getBalance();
 Unifonic::addSenderID(string $senderID);
@@ -72,7 +74,7 @@ Unifonic::addSenderID(string $senderID);
 Unifonic::testCredentials();
 ```
 
-####Messages related methods:
+#### Messages related methods:
 ```php
 Unifonic::send(int $recipient, string $message, string $senderID = null);
 Unifonic::sendBulk(array $recipients, string $message, string $senderID = null);
@@ -95,7 +97,7 @@ Unifonic::async()->callback(Callable $requestCallback)
 For more details about the parameters please refer to the [Api Documentation](http://docs.unifonic.apiary.io/) for more info, or read the [source code](https://github.com/liliomlab/laravel-unifonic/blob/master/src/UnifonicClient.php).
 
 
-## Contributing
+### Contributing
 See the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
 ### Change Log
