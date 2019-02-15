@@ -48,12 +48,12 @@ And add the alias as well
 ```
 
 ## Configurations
-Add to your `config/services.php` a new array as the following
+Hit to [Dashboard](https://software.unifonic.com/en/dashboard) to create a new REST app to use this channel. Within in this app, you will find the `APP SID`. Place it inside your `.env` file. To load it, add this to your `config/services.php` file:
 ```
 'unifonic' => [
     'app_id' => env('UNIFONIC_APP_SID'),
     'sender_id' => env('UNIFONIC_SENDER_ID') //optional
-],
+]
 ```
 
 If you don't want to publish the configs add Unifonic App Sid within your `.env` file
@@ -100,5 +100,5 @@ For more details about the parameters please refer to the [Api Documentation](ht
 ### Contributing
 See the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
-### Change Log
-See the [log](CHANGELOG.md) file.
+### Changelog
+Please see [CHANGELOG](CHANGELOG.md) for more information about what has changed recently.
