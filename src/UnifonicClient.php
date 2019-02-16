@@ -217,7 +217,7 @@ class UnifonicClient implements UnifonicClientContract
 
     public function testCredentials(): string
     {
-        return "APP SID: " . $this->appSid;
+        return "APP ID: " . $this->appSid;
     }
 
     public function addParams($params = [])
