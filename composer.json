@@ -1,6 +1,6 @@
 {
   "name": "liliom/laravel-unifonic",
-  "description": "A wrapper around the PHP SDK of Unifonic. Sending SMS, making Voice and VOIP calls, TTS calls, and 2FA",
+  "description": " A library to integrate with Unifonic API. Sending SMS, making Voice and VOIP calls, TTS calls, and 2FA",
   "keywords": [
     "laravel",
     "unifonic",
