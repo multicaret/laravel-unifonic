@@ -1,6 +1,6 @@
 <?php
 
-namespace Liliom\Unifonic;
+namespace Multicaret\Unifonic;
 
 use Illuminate\Support\ServiceProvider;
 

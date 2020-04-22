@@ -1,5 +1,5 @@
 {
-  "name": "liliom/laravel-unifonic",
+  "name": "multicaret/laravel-unifonic",
   "description": " A library to integrate with Unifonic API. Sending SMS, making Voice and VOIP calls, TTS calls, and 2FA",
   "keywords": [
     "laravel",
@@ -32,16 +32,16 @@
   ],
   "autoload": {
     "psr-4": {
-      "Liliom\\Unifonic\\": "src/"
+      "Multicaret\\Unifonic\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Liliom\\Unifonic\\UnifonicServiceProvider"
+        "Multicaret\\Unifonic\\UnifonicServiceProvider"
       ],
       "aliases": {
-        "Unifonic": "Liliom\\Unifonic\\UnifonicFacade"
+        "Unifonic": "Multicaret\\Unifonic\\UnifonicFacade"
       }
     }
   },

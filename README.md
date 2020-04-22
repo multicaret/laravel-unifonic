@@ -1,16 +1,16 @@
 <p align="center">
-<img src="http://unifonic.com/wp-content/uploads/2016/08/logo-1.png">
+<img src="http://www.unifonic.com/wp-content/themes/unifonic/images/logo.png">
 </p>
 
 
-# Laravel Unifonic 5.x 
+# Laravel Unifonic 7.x 
 Start sending SMS and making Voice calls with Unifonic right away using Laravel.
 
 
 <p align="center">
-<a href="https://packagist.org/packages/liliom/laravel-unifonic"><img src="https://poser.pugx.org/liliom/laravel-unifonic/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/liliom/laravel-unifonic"><img src="https://poser.pugx.org/liliom/laravel-unifonic/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/liliom/laravel-unifonic"><img src="https://poser.pugx.org/liliom/laravel-unifonic/license.svg" alt="License"></a>
+<a href="https://packagist.org/packages/multicaret/laravel-unifonic"><img src="https://poser.pugx.org/multicaret/laravel-unifonic/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/multicaret/laravel-unifonic"><img src="https://poser.pugx.org/multicaret/laravel-unifonic/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/multicaret/laravel-unifonic"><img src="https://poser.pugx.org/multicaret/laravel-unifonic/license.svg" alt="License"></a>
 </p>
 
 ---
@@ -19,21 +19,21 @@ Start sending SMS and making Voice calls with Unifonic right away using Laravel.
 First, install the package through Composer.
 
 ```sh
-$ composer require liliom/laravel-unifonic
+$ composer require multicaret/laravel-unifonic
 ```
-
-#### Laravel 5.5 and up
-
-You don't have to do anything else, this package uses the Package Auto-Discovery feature, and should be available as soon as you install it via Composer.
 
 #### Laravel 5.4 and down
 
 Then include the service provider inside `config/app.php`.
 
+#### Laravel 5.5 and up
+
+You don't have to do anything else, this package uses the Package Auto-Discovery feature, and should be available as soon as you install it via Composer.
+
 ```php
 'providers' => [
     ...
-    Liliom\Unifonic\UnifonicServiceProvider::class,
+    Multicaret\Unifonic\UnifonicServiceProvider::class,
     ...
 ];
 ```
@@ -42,7 +42,7 @@ And add the alias as well
 ```php
 'aliases' => [
     ...
-    'Unifonic' => Liliom\Unifonic\UnifonicFacade::class,
+    'Unifonic' => Multicaret\Unifonic\UnifonicFacade::class,
     ...
 ],
 ```
@@ -94,7 +94,7 @@ Unifonic::async()->callback(Callable $requestCallback)
 ``` 
 
 
-For more details about the parameters please refer to the [Api Documentation](http://docs.unifonic.apiary.io/) for more info, or read the [source code](https://github.com/liliomlab/laravel-unifonic/blob/master/src/UnifonicClient.php).
+For more details about the parameters please refer to the [Api Documentation](http://docs.unifonic.apiary.io/) for more info, or read the [source code](https://github.com/multicaret/laravel-unifonic/blob/master/src/UnifonicClient.php).
 
 
 ### Contributing
