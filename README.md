@@ -1,5 +1,9 @@
+#### This Branch is using the old V1 API of Unifonic, and it was deprecated, please refer to master branch.
+
+---
+
 <p align="center">
-<img src="http://www.unifonic.com/wp-content/themes/unifonic/images/logo.png">
+<img src="http://cdn.multicaret.com/packages/assets/img/unifonic-logo.png">
 </p>
 
 
