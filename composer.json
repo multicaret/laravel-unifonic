@@ -1,17 +1,14 @@
 {
   "name": "multicaret/laravel-unifonic",
-  "description": " A library to integrate with Unifonic API. Sending SMS, making Voice and VOIP calls, TTS calls, and 2FA",
+  "description": " A library to integrate with Unifonic API to send SMS",
   "keywords": [
     "laravel",
     "unifonic",
     "sms",
-    "voice",
     "2FA",
     "verify",
     "number intelligence",
-    "text-to-speech",
     "tts",
-    "voip",
     "api"
   ],
   "require": {

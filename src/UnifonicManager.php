@@ -13,10 +13,11 @@ class UnifonicManager
 
     /**
      * UnifonicManager constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
-        $this->with();
+        $this->withDefaultConfiguration();
     }
 
     /**
@@ -26,13 +27,25 @@ class UnifonicManager
      * @return $this
      * @throws \Exception
      */
-    public function with()
+    public function withDefaultConfiguration()
     {
         $appSid = config('services.unifonic.app_id');
+        $email = config('services.unifonic.account_email');
+        $password = config('services.unifonic.account_password');
+
         if (is_null($appSid)) {
             throw new \Exception('Invalid APP ID, please make sure to set the value of APP ID within your `config/services.php`');
         }
-        $this->client = new UnifonicClient($appSid);
+
+        if (is_null($email)) {
+            throw new \Exception('Empty Account Email provided, please make sure to set the value of Email within your `config/services.php`');
+        }
+
+        if (is_null($password)) {
+            throw new \Exception('Empty Account Password provided, please make sure to set the value of Account Password within your `config/services.php`');
+        }
+        
+        $this->client = new UnifonicClient($appSid, $email, $password);
 
         return $this;
     }

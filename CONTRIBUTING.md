@@ -4,7 +4,7 @@ First of all, **thank you** for contributing!
 
 Here are a few rules to follow in order to ease code reviews and merging:
 
-- Follow [PSR-1](http://www.php-fig.org/psr/1/) and [PSR-2](http://www.php-fig.org/psr/2/)
+- Follow [PSR-1](http://www.php-fig.org/psr/1/) and [PSR-12](https://www.php-fig.org/psr/psr-12/)
 - Run the test suite
 - Write (or update) unit tests when applicable
 - Write documentation for new features

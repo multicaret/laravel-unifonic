@@ -6,9 +6,8 @@ use GuzzleHttp\Client;
 
 class UnifonicClient implements UnifonicClientContract
 {
-    const API_URL = 'http://api.unifonic.com/rest/';
-    const ENDPOINT_MESSAGES = 'Messages/';
-    const ENDPOINT_ACCOUNT = "Account/";
+    const API_URL = 'http://basic.unifonic.com/rest/';
+    const ENDPOINT_MESSAGES = 'SMS/messages';
 
     private $client;
 
@@ -21,6 +20,16 @@ class UnifonicClient implements UnifonicClientContract
      * @var string
      */
     private $appSid;
+
+    /**
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var string
+     */
+    private $password;
 
     /**
      * @var array
@@ -37,117 +46,48 @@ class UnifonicClient implements UnifonicClientContract
     private $requestCallback;
 
 
-    public function __construct(string $appSid)
+    public function __construct(string $appSid, string $email, string $password)
     {
         $this->appSid = $appSid;
+        $this->email = $email;
+        $this->password = $password;
         $this->client = new Client();
-        $this->headers = ['headers' => []];
+        $this->headers = [
+            'headers' => [
+                'Authorization' => 'Basic '.base64_encode("$this->email:$this->password")
+            ],
+        ];
         $this->additionalParams = [];
     }
 
     /**
      * Get Message status.
      *
-     * @param int $messageID
+     * @param  int  $messageID
      *
      * @return array
      */
     public function getMessageIDStatus(int $messageID)
     {
-        return $this->postRequest(self::ENDPOINT_MESSAGES . 'GetMessageIDStatus', [
+        return $this->postRequest(self::ENDPOINT_MESSAGES.'/GetMessagesDetails', [
             'MessageID' => $messageID
         ]);
     }
 
     /**
-     * Get summarized report about the sent messages within a specific time interval
-     *
-     *
-     * @param null        $dateFrom
-     * @param null        $dateTo
-     * @param string|null $senderId
-     * @param string|null $status
-     * @param string|null $delivery
-     *
-     * @return object
-     */
-    public function getMessagesReport(
-        $dateFrom = null,
-        $dateTo = null,
-        string $senderId = null,
-        string $status = null,
-        string $delivery = null
-    ): object {
-        return $this->postRequest(self::ENDPOINT_MESSAGES . 'GetMessagesReport', [
-            'DateFrom' => $dateFrom,
-            'DateTo' => $dateTo,
-            'SenderID' => $senderId,
-            'Status' => $status,
-            'DLR' => $delivery,
-        ]);
-    }
-
-
-    /**
-     * Check the balance of your account.
-     *
-     * @return object
-     */
-    public function getBalance(): object
-    {
-        return $this->postRequest(self::ENDPOINT_ACCOUNT . 'GetBalance');
-    }
-
-    /**
-     * Add a new sender ID to your account.
-     *
-     * Sender ID should not exceed 11 characters or 16 numbers,
-     * only English letters allowed with no special characters or spaces
-     *
-     * @param string $senderID
-     *
-     * @return object
-     */
-    public function addSenderID(string $senderID): object
-    {
-        return $this->postRequest(self::ENDPOINT_ACCOUNT . 'addSenderID');
-    }
-
-    /**
      * Send a message to a recipient.
      *
-     * @param int         $recipient
-     * @param string      $message
+     * @param  int  $recipient
+     * @param  string  $message
      *
-     * @param string|null $senderID
+     * @param  string|null  $senderID
      *
      * @return object
      */
     public function send(int $recipient, string $message, string $senderID = null): object
     {
-        return $this->postRequest(self::ENDPOINT_MESSAGES . 'Send', [
+        return $this->postRequest(self::ENDPOINT_MESSAGES, [
             'Recipient' => $recipient,
-            'Body' => $message,
-            'SenderID' => $senderID
-        ]);
-    }
-
-    /**
-     * Send a message to multiple recipients, comma separated.
-     *
-     * @param array       $recipients
-     * @param string      $message
-     *
-     * @param string|null $senderID
-     *
-     * @return object
-     */
-    public function sendBulk(array $recipients, string $message, string $senderID = null): object
-    {
-        $recipients = implode(',', $recipients);
-
-        return $this->postRequest(self::ENDPOINT_MESSAGES . 'SendBulk', [
-            'Recipient' => $recipients,
             'Body' => $message,
             'SenderID' => $senderID
         ]);
@@ -160,10 +100,9 @@ class UnifonicClient implements UnifonicClientContract
         return $this;
     }
 
-
     /**
-     * @param string $endpoint
-     * @param array  $parameters
+     * @param  string  $endpoint
+     * @param  array  $parameters
      *
      * @return mixed
      */
@@ -190,7 +129,7 @@ class UnifonicClient implements UnifonicClientContract
     /**
      * Turn on, turn off async requests
      *
-     * @param bool $on
+     * @param  bool  $on
      *
      * @return $this
      */
@@ -204,20 +143,20 @@ class UnifonicClient implements UnifonicClientContract
     /**
      * Callback to execute after Unifonic returns the response
      *
-     * @param Callable $requestCallback
+     * @param  Callable  $requestCallback
      *
      * @return $this
      */
-    public function callback(Callable $requestCallback)
+    public function callback(callable $requestCallback)
     {
         $this->requestCallback = $requestCallback;
 
         return $this;
     }
 
-    public function testCredentials(): string
+    public function retrieveCredentialsForTesting(): string
     {
-        return "APP ID: " . $this->appSid;
+        return sprintf("APP ID: %s, Email: %s, Password: %s", $this->appSid, $this->email, $this->password);
     }
 
     public function addParams($params = [])
@@ -238,11 +177,11 @@ class UnifonicClient implements UnifonicClientContract
     private function post($endPoint)
     {
         if ($this->requestAsync === true) {
-            $promise = $this->client->postAsync(self::API_URL . $endPoint, $this->headers);
+            $promise = $this->client->postAsync(self::API_URL.$endPoint, $this->headers);
 
             return (is_callable($this->requestCallback) ? $promise->then($this->requestCallback) : $promise);
         }
 
-        return $this->client->post(self::API_URL . $endPoint, $this->headers);
+        return $this->client->post(self::API_URL.$endPoint, $this->headers);
     }
 }
