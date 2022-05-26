@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 class UnifonicClient implements UnifonicClientContract
 {
-    const API_URL = 'http://basic.unifonic.com/rest/';
+    const API_URL = 'https://el.cloud.unifonic.com/rest/';
     const ENDPOINT_MESSAGES = 'SMS/messages';
 
     private $client;
