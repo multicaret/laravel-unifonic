@@ -1,3 +1,6 @@
+## v2.1.0
+* Changed the base URL to https
+
 ## v2.0.0
 * Changed the usage to the new API since Unifonic replaced their v1 API from the ground up with different implementation.
 
